@@ -1,84 +1,181 @@
-version: '2.0'
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
 intents:
-- greet
-- ask_eat_healthy
-- ask_lower_stress
-- goodbye
-- affirm
-- deny
-- mood_great
-- mood_unhappy
-- bot_challenge
-- ask_exercise
-- inform
-- out_of_scope
-- thankyou
+- dor_de_cabeca
+- dor_torax
+- dor_abdomen
+- trauma
+- causa
+- sintomas_gripais
+- outros_sintomas
+- sim
+- negativo
+- dados
+- escala_de_dor
+- persistencia_dor
+- intoxicacao
+- idade
+- medicacao
+- alergias
+- age_number
+- dados_recebidos
+
+entities:
+  - pain_scale
+  - pain_persistance
+  - other_symptoms
+  - migrain
+  - alergies
+  - age
+  - infarction
+  - diabetes
+  - cause
+  - body_part
+  - bleeding
 
 slots:
-  confirm_exercise: 
+  body_temperature:
     type: unfeaturized
-  exercise: 
+    auto_fill: false
+  gender:
     type: unfeaturized
-  sleep: 
+    auto_fill: false
+  body_mass:
     type: unfeaturized
-  diet: 
+    auto_fill: false
+  height:
     type: unfeaturized
-  stress:
+  blood_pressure:
     type: unfeaturized
-  goal: 
+    auto_fill: false
+  blood_oxygen_level:
     type: unfeaturized
-
-entities: 
-  - exercise
-  - sleep
-  - stress
-
-
-responses:
-  utter_greet:
-  - text: Hey! It's time for your daily wellness check. Would you like to answer a few questions about your health?
-  utter_goodbye:
-  - text: Bye
-  utter_iamabot:
-  - text: I am a bot, powered by Rasa.
-  utter_stress_info:
-  - text: It's okay to feel overwhelmed at times. Try to set realistic expectations and exercise time management techniques, like dividing large tasks into more manageable pieces. Relaxation techniques, like deep breathing and meditation, can also be beneficial.
-  utter_exercise_info:
-  - text: Most healthy adults should aim to get about 150 minutes of moderate exercise per week.
-  utter_diet_info:
-  - text: A healthy diet includes fruits and vegetables, whole grains, dairy, lean protein and plant-based fats.
-  utter_ask_confirm_exercise:
-  - text: "Did you exercise yesterday? Don't sweat if you didn't run a marathon"
-  utter_ask_sleep:
-  - text: "How much sleep did you get last night?"
-  utter_ask_exercise:
-  - text: "What kind of exercise did you do?"
-  utter_ask_diet: 
-  - text: "Did you stick to a healthy diet yesterday?"
-  utter_ask_stress:
-  - text: "Is your stress level low, medium or high?"
-  utter_ask_goal:
-  - text: "Setting goal - even small ones - is a great way to focus your day. What do you want to accomplish today?"
-  utter_slots_values:
-  - text: "Here's your daily wellness log:\n
-            - Exercised?: {confirm_exercise}\n
-            - Type of exercise: {exercise}\n
-            - Sleep: {sleep}\n
-            - Stuck to a healthy diet? {diet}\n
-            - Stress level: {stress}\n
-            - Goal: {goal}"
-  utter_no_worries:
-  - text: "No problem :)"
-  utter_ask_continue:
-  - text: "Sorry, I don't quite understand. Do you want to continue?"
-
-forms: 
-  - health_form
+    auto_fill: false
+  previous_diseases:
+    type: unfeaturized
+    auto_fill: false
+  pain_scale:
+    type: unfeaturized
+    auto_fill: false
+  other_symptoms:
+    type: unfeaturized
+    auto_fill: false
+  migrain:
+    type: unfeaturized
+    auto_fill: false
+  pain_persistance:
+    type: unfeaturized
+    auto_fill: false
+  age:
+    type: unfeaturized
+    auto_fill: false
+  alergies:
+    type: unfeaturized
+    auto_fill: false
+  infarction:
+    type: unfeaturized
+    auto_fill: false
+  diabetes:
+    type: unfeaturized
+    auto_fill: false
+  pregnancy:
+    type: unfeaturized
+    auto_fill: false
+  cause:
+    type: unfeaturized
+    auto_fill: false
+  body_part:
+    type: unfeaturized
+    auto_fill: false
+  bleeding:
+    type: unfeaturized
+    auto_fill: false
 
 actions:
-- utter_diet_info
-- utter_greet
-- utter_stress_info
+- utter_ask_age
+- utter_ask_alergies
+- utter_ask_pain_scale
+- utter_ask_other_symptoms
+- utter_ask_migrain
+- utter_ask_pain_persistance
+- utter_ask_infarction
+- utter_ask_diabetes
+- utter_ask_pregnancy
+- utter_ask_bleeding
+- utter_ask_cause
+- utter_slots_values
+- utter_erro_escala_de_dor
+- utter_erro_persistencia_dor
+- utter_submit
+- utter_risco_vermelho
+- utter_risco_amarelo
+- utter_risco_verde
+- utter_risco_azul
+- utter_cadeira_de_rodas
+- utter_medicao
+- utter_erro_idade
+- utter_sinal
+- action_complete_triage_form
+- action_headache_risk
+- action_eletrocardiogram_check
+- action_chestpain_risk
+- action_abdominal_pain_risk
+- action_flu_like_risk
+- action_trauma_risk
+
+forms:
+- headache_form
+- initial_form
+- chestpain_form
+- abdominalpain_form
+- flulike_form
+- trauma_form
+
+
+templates:
+  utter_ask_age:
+    - text: "textr Qual é a sua idade?"
+  utter_ask_alergies:
+    - text: "textr Você possui alergia a alguma medicação? Se sim, cite a quais."
+  utter_ask_pain_scale:
+  - text: "pain_scale Em uma escala de 1 a 10, qual é a intensidade da sua dor?"
+  utter_ask_other_symptoms:
+    - text: "text O que mais você está sentindo?"
+  utter_ask_migrain:
+  - text: "yes_or_no Algum médico já o diagnosticou com enxaqueca?"
+  utter_ask_pain_persistance:
+  - text: "text Qual é a persistência da dor?"
+  utter_ask_diabetes:
+  - text: "yes_or_no Algum médico já o diagnosticou com diabetes?"
+  utter_ask_infarction:
+  - text: "yes_or_no Você já sofreu de infarto do miocárdio?"
+  utter_ask_pregnancy:
+  - text: "yes_or_no Existe possibilidade de gravidez?"
+  utter_wheelchair:
+    - text: "yes_or_no Você é usuário de cadeira de rodas?"
+  utter_ask_bleeding:
+    - text: "yes_or_no Apresenta sangramento?"
+  utter_ask_cause:
+    - text: "text O que causou o ferimento?"
+  utter_slots_values:
+  - text: "data age {age} alergies {alergies} diabetes {diabetes} infarction {infarction} migrain {migrain} other_symptoms {other_symptoms}."
+  utter_erro_escala_de_dor:
+    - text: "pain_scale Valor enviado foi inválido"
+  utter_erro_persistencia_dor:
+    - text: "text Não consegui entender qual é a persistência da dor"
+  utter_submit:
+    - text: "info Certo, estou calculando aqui seu risco."
+  utter_risco_vermelho:
+    - text: "risk red"
+  utter_risco_amarelo:
+    - text: "risk yellow"
+  utter_risco_verde:
+    - text: "risk green"
+  utter_risco_azul:
+    - text: "risk blue"
+  utter_eletrocardiograma:
+    - text: "eletrocardiogram eletrocardiogram"
+  utter_medicao:
+    - text: "measurements Hora de fazer uns exames iniciais."
+  utter_erro_idade:
+    - text: "text A idade que você forneceu não é valida, tente novamente."
+  utter_sinal:
+    - text: "signal Envio de sinal."
